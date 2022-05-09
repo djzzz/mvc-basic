@@ -11,12 +11,12 @@
             <nav>
                 <ul>
 
-                    <li>@Html.ActionLink("Index", "Index")</li>
-                    <li>@Html.ActionLink("About", "About")</li>
-                    <li>@Html.ActionLink("Contact", "Contact")</li>
-                    <li>@Html.ActionLink("Projects", "Projects")</li>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-controller="Home" asp-action="Projects">Projects</a></li>
                     <li><a asp-controller="FeverCheck" asp-action="Index">Fever checker</a></li>
-                    <li><a asp-controller="GuessingGame" asp-action="Index">Fever checker</a></li>
+                    <li><a asp-controller="GuessingGame" asp-action="Index">Guessing game</a></li>
                 </ul>
             </nav>
         </header>

@@ -23,6 +23,7 @@ namespace mvc_basic.Controllers
         public IActionResult Projects()
         {
             return View();
+        
         }
     }
 }

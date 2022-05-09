@@ -37,14 +37,7 @@ namespace mvc_basic
                     name: "defualt",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
-                endpoints.MapControllerRoute(
-                    name: "FeverCheck",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
-                );
-                endpoints.MapControllerRoute(
-                    name: "GuessingGame",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
-                );
+                
             });
         }
     }
