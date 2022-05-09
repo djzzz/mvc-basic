@@ -17,6 +17,8 @@ namespace mvc_basic
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,7 +30,7 @@ namespace mvc_basic
             }
             app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -37,6 +39,10 @@ namespace mvc_basic
                 );
                 endpoints.MapControllerRoute(
                     name: "FeverCheck",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
+                endpoints.MapControllerRoute(
+                    name: "GuessingGame",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
             });

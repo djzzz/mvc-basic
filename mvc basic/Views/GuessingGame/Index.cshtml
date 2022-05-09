@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["title"] = "Guessing Game";
+}
+<p>
+    @ViewBag.result
+</p>
+<form asp-controller="GuessingGame" asp-action="Index" method="post">
+    <input type="text" name="guess" />
+    <input type="submit" value="Give your guess" />
+</form>
+<p>
+    How many guesses you done is @ViewBag.count
+</p>
