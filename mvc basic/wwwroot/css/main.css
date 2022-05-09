@@ -53,3 +53,11 @@ p a {
 p a:hover {
     color: #ff8c3b;
 }
+.content input {
+    padding: 1rem;
+    margin-right: 1rem;
+    background: #fff;
+    border:none;
+    outline:none;
+    border-radius: 0.5rem;
+}

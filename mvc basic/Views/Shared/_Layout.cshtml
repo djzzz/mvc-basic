@@ -10,10 +10,12 @@
             <img class="logo" runat="server" src="~/images/Logo.svg" />
             <nav>
                 <ul>
+
                     <li>@Html.ActionLink("Index", "Index")</li>
                     <li>@Html.ActionLink("About", "About")</li>
                     <li>@Html.ActionLink("Contact", "Contact")</li>
                     <li>@Html.ActionLink("Projects", "Projects")</li>
+                    <li><a asp-controller="FeverCheck" asp-action="Index">Fever checker</a></li>
                 </ul>
             </nav>
         </header>
