@@ -3,7 +3,10 @@
 }
 
 
-<form asp-controller="FeverCheck" asp-action="Check" method="post">
+<form asp-route="doctor" method="post">
     <input type="text" name="temprature" />
     <input type="submit" value="Check your fever" />
 </form>
+<p>
+    @ViewBag.result
+</p>

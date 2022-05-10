@@ -4,7 +4,7 @@
 <p>
     @ViewBag.result
 </p>
-<form asp-controller="GuessingGame" asp-action="Index" method="post">
+<form asp-route="guess" method="post">
     <input type="text" name="guess" />
     <input type="submit" value="Give your guess" />
 </form>

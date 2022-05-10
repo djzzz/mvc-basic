@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace mvc_basic.Controllers
 {
-    public class GuessingGame : Controller
+    public class GuessingGameController : Controller
     {
         public Random random = new Random();
         [HttpGet]

@@ -4,19 +4,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using mvc_basic.Models;
 
 namespace mvc_basic.Controllers
 {
-    public class FeverCheck : Controller
+    public class FeverController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
+            ViewData["result"] = "";
             return View();
         }
         [HttpPost]
-        public IActionResult Check(IFormCollection fc)
+        public IActionResult Index(IFormCollection fc)
         {
+            FeverModel feverModel = new FeverModel();
             int temprature;
+
             bool succes = int.TryParse(fc["temprature"], out temprature);
 
             if (!succes)
@@ -25,9 +30,9 @@ namespace mvc_basic.Controllers
             }
             else
             {
-                if(temprature >= 35)
+                if (feverModel.CheckHypofermia(temprature))
                 {
-                    if(temprature <= 37)
+                    if (feverModel.CheckFever(temprature))
                     {
                         ViewData["result"] = "You have no problems with the tempature";
                     }

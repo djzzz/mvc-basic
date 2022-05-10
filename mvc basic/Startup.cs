@@ -37,7 +37,16 @@ namespace mvc_basic
                     name: "defualt",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
-                
+                endpoints.MapControllerRoute(
+                    name: "doctor",
+                    pattern: "doctor",
+                    defaults: new { controller = "fever", action = "Index" }
+                );
+                endpoints.MapControllerRoute(
+                    name: "guess",
+                    pattern: "guessingGame",
+                    defaults: new { controller = "GussingGame", action = "Index" }
+                );
             });
         }
     }
