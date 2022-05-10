@@ -9,7 +9,7 @@ namespace mvc_basic.Models
     {
         public bool CheckFever(int temp)
         {
-            if(temp <= 38)
+            if(temp >= 38)
             {
                 return true;
             }
@@ -17,7 +17,7 @@ namespace mvc_basic.Models
         }
         public bool CheckHypofermia(int temp)
         {
-            if (temp >= 35)
+            if (temp <= 35)
             {
                 return true;
             }

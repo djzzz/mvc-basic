@@ -32,18 +32,15 @@ namespace mvc_basic.Controllers
             {
                 if (feverModel.CheckHypofermia(temprature))
                 {
-                    if (feverModel.CheckFever(temprature))
-                    {
-                        ViewData["result"] = "You have no problems with the tempature";
-                    }
-                    else
-                    {
-                        ViewData["result"] = "You have fever";
-                    }
+                    ViewData["result"] = "You have hypothermia";
+                }
+                else if(feverModel.CheckFever(temprature))
+                {
+                    ViewData["result"] = "You have fever";
                 }
                 else
                 {
-                    ViewData["result"] = "You have hypothermia";
+                    ViewData["result"] = "You have no problems with the tempature";
                 }
             }
             return View();

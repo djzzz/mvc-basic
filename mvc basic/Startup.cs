@@ -33,10 +33,7 @@ namespace mvc_basic
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "defualt",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
-                );
+                
                 endpoints.MapControllerRoute(
                     name: "doctor",
                     pattern: "doctor",
@@ -46,6 +43,10 @@ namespace mvc_basic
                     name: "guess",
                     pattern: "guessingGame",
                     defaults: new { controller = "GussingGame", action = "Index" }
+                );
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
             });
         }
