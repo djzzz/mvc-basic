@@ -9,6 +9,7 @@ namespace mvc_basic.Models
 {
     public class PeopleModel
     {
+        static public int lastIndex = 0;
         static public List<CreatePersonViewModel> people = new List<CreatePersonViewModel> { };
     }
 }

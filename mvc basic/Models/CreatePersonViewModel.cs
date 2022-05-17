@@ -8,6 +8,7 @@ namespace mvc_basic.Models
 {
     public class CreatePersonViewModel
     {
+        public int index;
         [Required]
         public string? Name { get; set; }
         [Required]

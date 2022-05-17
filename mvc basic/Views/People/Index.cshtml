@@ -9,24 +9,7 @@
     @foreach (var item in Model.List)
     {
 
-
-        @if (ViewBag.search)
-        {
-            <a>@item.Name</a>
-            <a>@item.Number</a>
-            <a>@item.City</a>
-        }
-        else
-        {
-            <a asp-controller="People" asp-action="Index" asp-route-id="@Model.List.IndexOf(item)">@item.Name</a>
-            <a>@item.Number</a>
-            <a>@item.City</a>
-        }
-
-
-
-
-
+        <partial name="Components/_Person.cshtml" for="@item" />
     }
 </div>
 
