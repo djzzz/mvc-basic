@@ -1,0 +1,23 @@
+﻿@model mvc_basic.Models.PersonViewModel
+<form asp-controller="People" asp-action="Index" method="get">
+    <label name="search">search</label>
+    <input name="search" />
+    <input type="submit" value="Save" />
+</form>
+
+<div>
+@foreach(var item in Model.List) { 
+    <p>@item.Name</p>
+}
+</div>
+
+<form asp-controller="People" asp-action="Index" method="post" >
+    <label asp-for="@Model.createPersonView.Name">Name</label>
+    <input asp-for="@Model.createPersonView.Name" />
+    <label asp-for="@Model.createPersonView.Number">Phone number</label>
+    <input asp-for="@Model.createPersonView.Number" />
+    <label asp-for="@Model.createPersonView.City">City</label>
+    <input asp-for="@Model.createPersonView.City" />
+    <input type="submit" value="Save" />
+</form>
+

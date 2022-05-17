@@ -1,0 +1,7 @@
+﻿@model mvc_basic.Models.TestModel
+<h2>Album: @Model.Title</h2>
+<p>
+    @ViewBag.id
+</p>
+<partial name="../test/test.cshtml" />
+@await Html.PartialAsync("../test/test.cshtml")
