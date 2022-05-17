@@ -1,17 +1,36 @@
 ﻿@model mvc_basic.Models.PersonViewModel
-<form asp-controller="People" asp-action="Index" method="get">
+<form asp-controller="People" asp-action="Index" asp-route-id="" method="get">
     <label name="search">search</label>
     <input name="search" />
     <input type="submit" value="Save" />
 </form>
 
-<div>
-@foreach(var item in Model.List) { 
-    <p>@item.Name</p>
-}
+<div class="col">
+    @foreach (var item in Model.List)
+    {
+
+
+        @if (ViewBag.search)
+        {
+            <a>@item.Name</a>
+            <a>@item.Number</a>
+            <a>@item.City</a>
+        }
+        else
+        {
+            <a asp-controller="People" asp-action="Index" asp-route-id="@Model.List.IndexOf(item)">@item.Name</a>
+            <a>@item.Number</a>
+            <a>@item.City</a>
+        }
+
+
+
+
+
+    }
 </div>
 
-<form asp-controller="People" asp-action="Index" method="post" >
+<form asp-controller="People" asp-action="Index" asp-route-id="" method="post" >
     <label asp-for="@Model.createPersonView.Name">Name</label>
     <input asp-for="@Model.createPersonView.Name" />
     <label asp-for="@Model.createPersonView.Number">Phone number</label>

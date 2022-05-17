@@ -61,3 +61,12 @@ p a:hover {
     outline:none;
     border-radius: 0.5rem;
 }
+.col{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 0.5%;
+    margin: 2rem;
+}
+.col a{
+    margin-bottom: 1rem ;
+}

@@ -12,13 +12,14 @@ namespace mvc_basic.Controllers
         public PersonViewModel personViewModel = new PersonViewModel();
         public IActionResult Index()
         {
-            
+            ViewData["search"] = false;
             return View(personViewModel);
         }
 
         [HttpPost]
         public IActionResult Index(PersonViewModel personViewModelInput)
         {
+            ViewData["search"] = false;
             if (ModelState.IsValid)
             {
                 personViewModel.Add(personViewModelInput.createPersonView);
@@ -28,16 +29,26 @@ namespace mvc_basic.Controllers
         [HttpGet]
         public IActionResult Index(string search)
         {
+            ViewData["search"] = true;
             PersonViewModel searched = new PersonViewModel();
-            if (search == "")
+            if (search == null)
             {
+                ViewData["search"] = false;
                 searched.List = personViewModel.List;
             }
             else
             {
+
                 searched.List = personViewModel.List.Where(o => o.Name == search).ToList();
             }
             
+            return View(searched);
+        }
+        [Route("People/{id}")]
+        public IActionResult Index(int id)
+        {
+            ViewData["search"] = false;
+            personViewModel.Remove(id);
             return View(personViewModel);
         }
     }
