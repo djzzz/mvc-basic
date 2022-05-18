@@ -1,0 +1,8 @@
+﻿@model mvc_basic.Models.PersonViewModel
+<div class="col" id="container">
+    @foreach (var item in Model.List)
+    {
+
+        <partial name="_Person" for="@item" />
+    }
+</div>

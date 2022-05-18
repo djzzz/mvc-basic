@@ -1,19 +1,16 @@
 ﻿@model mvc_basic.Models.PersonViewModel
-<form asp-controller="People" asp-action="Index" asp-route-id="" method="get">
+<form asp-controller="People" asp-action="Index" asp-route-id="" method="get" id="Search">
+    <input name="url" type="hidden" value="@Url.Action("Search", "People")" />
     <label name="search">search</label>
     <input name="search" />
     <input type="submit" value="Save" />
 </form>
 
-<div class="col">
-    @foreach (var item in Model.List)
-    {
+<partial name="_PersonContainer" for="@Model" />
 
-        <partial name="Components/_Person.cshtml" for="@item" />
-    }
-</div>
 
-<form asp-controller="People" asp-action="Index" asp-route-id="" method="post" >
+<form asp-controller="People" asp-action="Index" asp-route-id="" method="post" id="Add">
+    <input name="url" type="hidden" value="@Url.Action("Index", "People")" />
     <label asp-for="@Model.createPersonView.Name">Name</label>
     <input asp-for="@Model.createPersonView.Name" />
     <label asp-for="@Model.createPersonView.Number">Phone number</label>
@@ -23,3 +20,7 @@
     <input type="submit" value="Save" />
 </form>
 
+<script src="~/js/AddPeople.js"></script>
+<script src="~/js/DeletePerson.js"></script>
+<script src="~/js/Search.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

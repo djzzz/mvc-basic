@@ -24,10 +24,11 @@ namespace mvc_basic.Controllers
             {
                 personViewModel.Add(personViewModelInput.createPersonView);
             }
-            return View(personViewModel);
+            
+            return PartialView("_Person", personViewModelInput.createPersonView);
         }
         [HttpGet]
-        public IActionResult Index(string search)
+        public IActionResult Search(string search)
         {
             ViewData["search"] = true;
             PersonViewModel searched = new PersonViewModel();
@@ -41,15 +42,15 @@ namespace mvc_basic.Controllers
 
                 searched.List = personViewModel.List.Where(o => o.Name == search).ToList();
             }
-            
-            return View(searched);
+
+            return PartialView("_PersonContainer", searched);
         }
         [Route("People/{id}")]
         public IActionResult Index(int id)
         {
             ViewData["search"] = false;
             personViewModel.Remove(id);
-            return View(personViewModel);
+            return PartialView("_PersonContainer", personViewModel);
         }
     }
 }

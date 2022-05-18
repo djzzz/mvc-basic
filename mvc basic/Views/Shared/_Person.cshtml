@@ -1,5 +1,7 @@
 ﻿@model mvc_basic.Models.CreatePersonViewModel
-
-    <a asp-controller="People" asp-action="Index" asp-route-id="@Model.index">@Model.Name</a>
+<div>
+    <a onclick="deletePerson('People', '@Model.index')">@Model.Name</a>
     <a>@Model.Number</a>
     <a>@Model.City</a>
+</div>
+    
