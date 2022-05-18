@@ -20,8 +20,4 @@
     <None Include="wwwroot\images\Logo.svg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\People\Partial\" />
-  </ItemGroup>
-
 </Project>
