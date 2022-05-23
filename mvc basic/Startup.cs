@@ -7,19 +7,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using mvc_basic.Data;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 namespace mvc_basic
 {
     public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        private readonly IConfiguration Configuration;
+        public Startup(IConfiguration config)
+        {
+            Configuration = config;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
             services.AddHttpContextAccessor();
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

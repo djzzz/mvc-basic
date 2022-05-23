@@ -1,6 +1,6 @@
-﻿@model mvc_basic.Models.CreatePersonViewModel
+﻿@model mvc_basic.Models.People
 <div>
-    <a onclick="deletePerson('People', '@Model.index')">@Model.Name</a>
+    <a onclick="deletePerson('People', '@Model.Id')">@Model.Name</a>
     <a>@Model.Number</a>
     <a>@Model.City</a>
 </div>
