@@ -15,8 +15,14 @@
                     <li><a asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <li><a asp-controller="Home" asp-action="Projects">Projects</a></li>
-                    <li><a asp-controller="People" asp-action="Index">Projects</a></li>
-                    <li><a asp-controller="Home" asp-action="TryModelBinding" asp-route-id="1">Projects</a></li>
+
+                    <li>
+                        <a asp-controller="People" asp-action="Index">People</a>
+                        <ul class="dropdown">
+                            <li><a asp-controller="City" asp-action="Index">City</a></li>
+                            <li><a asp-controller="Country" asp-action="Index">Country</a></li>
+                        </ul>
+                    </li>
                     <li><a asp-route="doctor">Fever checker</a></li>
                     <li><a asp-route="guess">Guessing game</a></li>
                 </ul>

@@ -13,7 +13,7 @@ namespace mvc_basic.Models
         [Required]
         public int? Number { get; set; }
         [Required]
-        public string? City { get; set; }
+        public int? City { get; set; }
         
     }
 }

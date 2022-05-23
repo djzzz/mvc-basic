@@ -1,0 +1,8 @@
+﻿@model mvc_basic.Models.Countrys.CountrysViewModel
+<div class="col" id="container">
+    @foreach (var item in Model.List)
+    {
+
+        <partial name="_Country" for="@item" />
+    }
+</div>

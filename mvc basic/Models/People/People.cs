@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mvc_basic.Models.Cities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +18,8 @@ namespace mvc_basic.Models
         public string Name { get; set; }
         [Required]
         public int Number { get; set; }
+        public int CityId { get; set; }
         [Required]
-        public string City { get; set; }
+        public virtual City City { get; set; }
     }
 }

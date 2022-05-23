@@ -2,7 +2,7 @@
 
 namespace mvc_basic.Migrations
 {
-    public partial class init2 : Migration
+    public partial class Addrel4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

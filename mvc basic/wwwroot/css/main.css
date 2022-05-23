@@ -70,3 +70,38 @@ p a:hover {
 .col a{
     margin-bottom: 1rem ;
 }
+ul li .dropdown {
+    display:none;
+    padding: 0px;
+    position: absolute;
+    background: #000;
+    border-bottom: 1px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transform: translateX(-25%);
+}
+ul li:hover .dropdown {
+    display: grid;
+    
+}
+.dropdown li {
+    margin: 0px;
+    padding: 1em;
+}
+.Container {
+    padding-bottom: 0.5em;
+    text-align:center;
+    position:relative;
+}
+    .Container::after {
+        display: block;
+        position: absolute;
+        content: "";
+        width: 20%;
+        background: #fff;
+        height: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+    }

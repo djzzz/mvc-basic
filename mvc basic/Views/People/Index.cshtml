@@ -15,8 +15,12 @@
     <input asp-for="@Model.createPersonView.Name" />
     <label asp-for="@Model.createPersonView.Number">Phone number</label>
     <input asp-for="@Model.createPersonView.Number" />
-    <label asp-for="@Model.createPersonView.City">City</label>
-    <input asp-for="@Model.createPersonView.City" />
+    <select asp-for="@Model.createPersonView.City">
+        @foreach (var City in Model.cities)
+        {
+            <option value="@City.CityId">@City.Name</option>
+        }
+    </select>
     <input type="submit" value="Save" />
 </form>
 
