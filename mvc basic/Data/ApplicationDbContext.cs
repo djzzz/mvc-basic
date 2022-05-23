@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using mvc_basic.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace mvc_basic.Data
 {
