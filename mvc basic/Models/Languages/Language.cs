@@ -1,6 +1,4 @@
-﻿using mvc_basic.Models.Cities;
-using mvc_basic.Models.Languages;
-using mvc_basic.Models.ManyToMany;
+﻿using mvc_basic.Models.ManyToMany;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,20 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace mvc_basic.Models
+namespace mvc_basic.Models.Languages
 {
-    public class People
+    public class Language
     {
         [Key]
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PeopleId { get; set; }
-        [Required]
+        public int LanguageID { get; set; }
         public string Name { get; set; }
-        [Required]
-        public int Number { get; set; }
-        public int CityId { get; set; }
-        public virtual City City { get; set; }
         public ICollection<LanguagePeople> LanguagePeople { get; set; }
     }
 }

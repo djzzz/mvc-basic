@@ -22,7 +22,8 @@ namespace mvc_basic.Controllers
         private ApplicationDbContext Context { get; }
         public IActionResult Index()
         {
-            List<People> people = Context.people.Include(i => i.City).ToList();
+            List<People> people = Context.people.Include(i => i.City).Include(i => i.LanguagePeople).ThenInclude(i => i.Language).ToList();
+
             personViewModel.List = people;
             ViewData["search"] = false;
             

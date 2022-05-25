@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using mvc_basic.Models;
 using mvc_basic.Models.Cities;
 using mvc_basic.Models.Countrys;
+using mvc_basic.Models.ManyToMany;
+using mvc_basic.Models.Languages;
 
 namespace mvc_basic.Data
 {
@@ -14,6 +16,8 @@ namespace mvc_basic.Data
         public DbSet<People> people { get; set; }
         public DbSet<City> cities { get; set; }
         public DbSet<Country> countrys { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<LanguagePeople> LanguagePeople { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             
@@ -49,15 +53,27 @@ namespace mvc_basic.Data
             City Malmo = new City() { CityId = 15, Name = "Malmö", CountryId = Sweden.CountryId };
             City Uppsala = new City() { CityId = 16, Name = "Uppsala", CountryId = Sweden.CountryId };
 
-            People Simon = new People() { Id = 1, Name = "Simon", Number = 123, CityId = London.CityId };
-            People Frans = new People() { Id = 2, Name = "Frans", Number = 123, CityId = Liverpool.CityId };
-            People Roger = new People() { Id = 3, Name = "Roger", Number = 123, CityId = Moscow.CityId };
-            People Alf = new People() { Id = 4, Name = "Alf", Number = 123, CityId = Madrid.CityId };
-            People Bruno = new People() { Id = 5, Name = "Bruno", Number = 123, CityId = Seville.CityId };
-            People Shan = new People() { Id = 6, Name = "Shan", Number = 123, CityId = Stockholm.CityId };
-            People Elf = new People() { Id = 7, Name = "Elf", Number = 123, CityId = Gothenburg.CityId };
+            People Simon = new People() { PeopleId = 1, Name = "Simon", Number = 123, CityId = London.CityId };
+            People Frans = new People() { PeopleId = 2, Name = "Frans", Number = 123, CityId = Liverpool.CityId };
+            People Roger = new People() { PeopleId = 3, Name = "Roger", Number = 123, CityId = Moscow.CityId };
+            People Alf = new People() { PeopleId = 4, Name = "Alf", Number = 123, CityId = Madrid.CityId };
+            People Bruno = new People() { PeopleId = 5, Name = "Bruno", Number = 123, CityId = Seville.CityId };
+            People Shan = new People() { PeopleId = 6, Name = "Shan", Number = 123, CityId = Stockholm.CityId };
+            People Elf = new People() { PeopleId = 7, Name = "Elf", Number = 123, CityId = Gothenburg.CityId };
+
+            Language Spanish = new Language() { LanguageID = 1, Name = "Spanish" };
+            Language France = new Language() { LanguageID = 2, Name = "France" };
+            LanguagePeople SpanishToSimon = new LanguagePeople() { LanguageId = Spanish.LanguageID, PeopleId = Simon.PeopleId };
 
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<LanguagePeople>()
+                .HasKey(e => new { e.LanguageId, e.PeopleId });
+            modelBuilder.Entity<LanguagePeople>()
+                .HasOne(e => e.Language)
+                .WithMany(e => e.LanguagePeople);
+            modelBuilder.Entity<LanguagePeople>()
+                .HasOne(e => e.People)
+                .WithMany(e => e.LanguagePeople);
             modelBuilder.Entity<City>()
                 .HasOne(e => e.Country)
                 .WithMany(e => e.Cities);
@@ -102,6 +118,14 @@ namespace mvc_basic.Data
                 Shan,
                 Elf
             );
+            modelBuilder.Entity<Language>().HasData(
+                Spanish,
+                France
+            );
+            modelBuilder.Entity<LanguagePeople>().HasData(
+                SpanishToSimon
+            );
+
         }
         #endregion
         

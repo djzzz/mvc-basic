@@ -9,8 +9,8 @@ using mvc_basic.Data;
 namespace mvc_basic.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220523194837_Add rel4")]
-    partial class Addrel4
+    [Migration("20220524080245_Migratio3")]
+    partial class Migratio3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -177,9 +177,58 @@ namespace mvc_basic.Migrations
                         });
                 });
 
+            modelBuilder.Entity("mvc_basic.Models.Languages.Language", b =>
+                {
+                    b.Property<int>("LanguageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LanguageID");
+
+                    b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            LanguageID = 1,
+                            Name = "Spanish"
+                        },
+                        new
+                        {
+                            LanguageID = 2,
+                            Name = "France"
+                        });
+                });
+
+            modelBuilder.Entity("mvc_basic.Models.ManyToMany.LanguagePeople", b =>
+                {
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PeopleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LanguageId", "PeopleId");
+
+                    b.HasIndex("PeopleId");
+
+                    b.ToTable("LanguagePeople");
+
+                    b.HasData(
+                        new
+                        {
+                            LanguageId = 1,
+                            PeopleId = 1
+                        });
+                });
+
             modelBuilder.Entity("mvc_basic.Models.People", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PeopleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -194,7 +243,7 @@ namespace mvc_basic.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("PeopleId");
 
                     b.HasIndex("CityId");
 
@@ -203,49 +252,49 @@ namespace mvc_basic.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            PeopleId = 1,
                             CityId = 1,
                             Name = "Simon",
                             Number = 123
                         },
                         new
                         {
-                            Id = 2,
+                            PeopleId = 2,
                             CityId = 4,
                             Name = "Frans",
                             Number = 123
                         },
                         new
                         {
-                            Id = 3,
+                            PeopleId = 3,
                             CityId = 5,
                             Name = "Roger",
                             Number = 123
                         },
                         new
                         {
-                            Id = 4,
+                            PeopleId = 4,
                             CityId = 9,
                             Name = "Alf",
                             Number = 123
                         },
                         new
                         {
-                            Id = 5,
+                            PeopleId = 5,
                             CityId = 12,
                             Name = "Bruno",
                             Number = 123
                         },
                         new
                         {
-                            Id = 6,
+                            PeopleId = 6,
                             CityId = 13,
                             Name = "Shan",
                             Number = 123
                         },
                         new
                         {
-                            Id = 7,
+                            PeopleId = 7,
                             CityId = 14,
                             Name = "Elf",
                             Number = 123
@@ -261,6 +310,25 @@ namespace mvc_basic.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("mvc_basic.Models.ManyToMany.LanguagePeople", b =>
+                {
+                    b.HasOne("mvc_basic.Models.Languages.Language", "Language")
+                        .WithMany("LanguagePeople")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("mvc_basic.Models.People", "People")
+                        .WithMany("LanguagePeople")
+                        .HasForeignKey("PeopleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+
+                    b.Navigation("People");
                 });
 
             modelBuilder.Entity("mvc_basic.Models.People", b =>
@@ -282,6 +350,16 @@ namespace mvc_basic.Migrations
             modelBuilder.Entity("mvc_basic.Models.Countrys.Country", b =>
                 {
                     b.Navigation("Cities");
+                });
+
+            modelBuilder.Entity("mvc_basic.Models.Languages.Language", b =>
+                {
+                    b.Navigation("LanguagePeople");
+                });
+
+            modelBuilder.Entity("mvc_basic.Models.People", b =>
+                {
+                    b.Navigation("LanguagePeople");
                 });
 #pragma warning restore 612, 618
         }

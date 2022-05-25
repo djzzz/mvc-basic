@@ -1,7 +1,13 @@
 ﻿@model mvc_basic.Models.People
 <div>
-    <a onclick="deletePerson('People', '@Model.Id')">@Model.Name</a>
+    <a onclick="deletePerson('People', '@Model.PeopleId')">@Model.Name</a>
     <a>@Model.Number</a>
     <a>@Model.City.Name</a>
+    <a>
+        @foreach (var lang in Model.LanguagePeople)
+        {
+        <span>|</span> @lang.Language.Name;
+        }
+    </a>
 </div>
     

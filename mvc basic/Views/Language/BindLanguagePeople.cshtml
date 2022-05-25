@@ -1,0 +1,38 @@
+﻿@model mvc_basic.Models.Languages.LanguageViewModel
+
+<form asp-controller="Language" asp-action="Index" asp-route-id="" method="post" id="Add">
+    <label asp-for="@Model.CreateLanguageViewModel.Name">Name</label>
+    <input asp-for="@Model.CreateLanguageViewModel.Name" />
+    <input type="submit" value="Save" />
+</form>
+
+@foreach (var lang in Model.List)
+{
+<a>@lang.Name</a>
+<br />
+}
+
+<form asp-controller="Language" asp-action="BindLanguagePeople" asp-route-id="" method="post" id="Add">
+    <label asp-for="@Model.CreateLanguagePeopleViewModel.People">People</label>
+    <select asp-for="@Model.CreateLanguagePeopleViewModel.People">
+        @foreach (var pers in Model.Peoples)
+        {
+        <option value="@pers.PeopleId">@pers.Name</option>
+        }
+    </select>
+    <label asp-for="@Model.CreateLanguagePeopleViewModel.Language">Language</label>
+    <select asp-for="@Model.CreateLanguagePeopleViewModel.Language">
+        @foreach (var lang in Model.List)
+        {
+        <option value="@lang.LanguageID">@lang.Name</option>
+        }
+    </select>
+    <input type="submit" value="Save" />
+</form>
+
+@foreach (var languagePeoples in Model.LanguagePeoples)
+{
+<a>@languagePeoples.People.Name</a>
+<a>@languagePeoples.Language.Name</a>
+<br />
+}
