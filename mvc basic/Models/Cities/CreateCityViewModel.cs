@@ -10,5 +10,7 @@ namespace mvc_basic.Models.Cities
     {
         [Required]
         public string? Name { get; set; }
+        [Required]
+        public int? Country { get; set; }
     }
 }

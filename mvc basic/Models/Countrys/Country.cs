@@ -17,5 +17,10 @@ namespace mvc_basic.Models.Countrys
         [Required]
         public string Name { get; set; }
         public virtual ICollection<City> Cities { get; set; }
+
+        public static explicit operator int(Country v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

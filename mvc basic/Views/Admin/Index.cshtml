@@ -1,0 +1,8 @@
+﻿@model mvc_basic.Models.Users.Users
+<div class="col" id="container">
+    @foreach (var user in @Model.List)
+    {
+
+        <partial name="_User" for="@user" />
+    }
+</div>

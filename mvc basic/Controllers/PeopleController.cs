@@ -7,9 +7,12 @@ using mvc_basic.Models;
 using mvc_basic.Data;
 using Microsoft.EntityFrameworkCore;
 using mvc_basic.Models.Cities;
+using Microsoft.AspNetCore.Authorization;
+using mvc_basic.Models.ManyToMany;
 
 namespace mvc_basic.Controllers
 {
+    [Authorize()]
     public class PeopleController : Controller
     {
         public PersonViewModel personViewModel = new PersonViewModel();
@@ -25,7 +28,6 @@ namespace mvc_basic.Controllers
             List<People> people = Context.people.Include(i => i.City).Include(i => i.LanguagePeople).ThenInclude(i => i.Language).ToList();
 
             personViewModel.List = people;
-            ViewData["search"] = false;
             
             return View(personViewModel);
         }
@@ -34,7 +36,6 @@ namespace mvc_basic.Controllers
         public IActionResult Index(PersonViewModel personViewModelInput)
         {
             CreatePersonViewModel person = personViewModelInput.createPersonView;
-            ViewData["search"] = false;
             if (ModelState.IsValid)
             {
                 People newPerson = new People { Name = person.Name, Number = (int)person.Number, CityId = (int)person.City};
@@ -48,12 +49,10 @@ namespace mvc_basic.Controllers
         [HttpGet]
         public IActionResult Search(string search)
         {
-            ViewData["search"] = true;
             List<People> people = Context.people.Include(i => i.City).ToList();
             PersonViewModel searched = new PersonViewModel();
             if (search == null)
             {
-                ViewData["search"] = false;
                 searched.List = people;
             }
             else
@@ -71,7 +70,15 @@ namespace mvc_basic.Controllers
         public async Task<IActionResult> Index(int id)
         {
             People person = await Context.people.FindAsync(id);
-            if(person == null)
+            if(person.LanguagePeople != null)
+            {
+                foreach (LanguagePeople languagePeople in person.LanguagePeople)
+                {
+                    Context.LanguagePeople.Remove(languagePeople);
+                }
+            }
+            
+            if (person == null)
             {
                 
             }
@@ -81,6 +88,40 @@ namespace mvc_basic.Controllers
             personViewModel.List = people;
             ViewData["search"] = false;
             return PartialView("_PersonContainer", personViewModel);
+        }
+
+        [Route("People/Edit/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id, PersonViewModel personViewModelInput)
+        {
+
+            People person = await Context.people.FindAsync(id);
+            personViewModelInput.createPersonView = new CreatePersonViewModel { Name = person.Name, Number = person.Number, City = person.CityId };
+            ViewData["id"] = id;
+
+            List<People> people = Context.people.Include(i => i.City).Include(i => i.LanguagePeople).ThenInclude(i => i.Language).ToList();
+
+            personViewModelInput.List = people;
+            personViewModelInput.cities = Context.cities.ToList();
+            return View(personViewModelInput);
+        }
+
+        [Route("People/Edit/Save/{id}")]
+        [HttpPost]
+        public async Task<IActionResult> Save(int id, PersonViewModel personViewModelInput)
+        {
+
+            People person = await Context.people.FindAsync(id);
+            if (ModelState.IsValid)
+            {
+                person.Name = personViewModelInput.createPersonView.Name;
+                person.Number = (int)personViewModelInput.createPersonView.Number;
+                person.CityId = (int)personViewModelInput.createPersonView.City;
+                Context.people.Update(person);
+                Context.SaveChanges();
+            }
+            return new RedirectResult(url: "/People", permanent: false,
+                            preserveMethod: false);
         }
     }
 }

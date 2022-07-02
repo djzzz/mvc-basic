@@ -1,0 +1,29 @@
+﻿@model mvc_basic.Models.PersonViewModel
+<form asp-controller="People" asp-action="Index" asp-route-id="" method="get" id="Search">
+    <input name="url" type="hidden" value="@Url.Action("Search", "People")" />
+    <label name="search">search</label>
+    <input name="search" />
+    <input type="submit" value="Save" />
+</form>
+
+<partial name="_PersonContainer" for="@Model" />
+
+
+<form asp-controller="People" asp-action="Save" asp-route-id="@ViewData["id"]" method="post" id="Add">
+    <label asp-for="@Model.createPersonView.Name" >Name</label>
+    <input asp-for="@Model.createPersonView.Name" value="@Model.createPersonView.Name"/>
+    <label asp-for="@Model.createPersonView.Number">Phone number</label>
+    <input asp-for="@Model.createPersonView.Number" value="@Model.createPersonView.Number"/>
+    <select asp-for="@Model.createPersonView.City" value="@Model.createPersonView.City">
+        @foreach (var City in Model.cities)
+        {
+            <option value="@City.CityId">@City.Name</option>
+        }
+    </select>
+    <input type="submit" value="Save" />
+</form>
+
+<script src="~/js/AddPeople.js"></script>
+<script src="~/js/DeletePerson.js"></script>
+<script src="~/js/Search.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

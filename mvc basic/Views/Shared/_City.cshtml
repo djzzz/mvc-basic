@@ -1,6 +1,6 @@
 ﻿@model mvc_basic.Models.Cities.City
 <div class="Container">
-    <a onclick="deletePerson('Country', '@Model.CityId')">@Model.Name</a>
+    <a asp-controller="City" asp-action="Delete" asp-route-id="@Model.CityId">@Model.Name</a>
     <br />
     @if (Model.Peoples.Count != 0)
     {
@@ -10,6 +10,7 @@
         }
 
     }
+    <p><a asp-controller="City" asp-action="Edit" asp-route-id="@Model.CityId">Edit</a></p>
     <br />
     <br />
 </div>

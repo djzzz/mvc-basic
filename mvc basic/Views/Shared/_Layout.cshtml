@@ -15,18 +15,32 @@
                     <li><a asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <li><a asp-controller="Home" asp-action="Projects">Projects</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a asp-controller="People" asp-action="Index">People</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <ul class="dropdown">
 
-                    <li>
-                        <a asp-controller="People" asp-action="Index">People</a>
-                        <ul class="dropdown">
-                            <li><a asp-controller="City" asp-action="Index">City</a></li>
-                            <li><a asp-controller="Country" asp-action="Index">Country</a></li>
-                            <li><a asp-controller="Language" asp-action="Index">Language</a></li>
-                        </ul>
-                    </li>
+                                    <li><a asp-controller="City" asp-action="Index">City</a></li>
+                                    <li><a asp-controller="Country" asp-action="Index">Country</a></li>
+                                    <li><a asp-controller="Language" asp-action="Index">Language</a></li>
+                                </ul>
+
+                            }
+
+                        </li>
+                    }
+
                     <li><a asp-route="doctor">Fever checker</a></li>
                     <li><a asp-route="guess">Guessing game</a></li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>
+                    }
                 </ul>
+                <partial name="_loginPartial" />
             </nav>
         </header>
         <main>
@@ -39,5 +53,6 @@
         <footer>
             <span>@DateTime.Now.Year </span> <span>Djzzz</span>
         </footer>
+        @RenderSection("Scripts", required:false)
     </body>
 </html>

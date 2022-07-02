@@ -1,0 +1,9 @@
+﻿@model mvc_basic.Models.Countrys.CountrysViewModel
+
+<partial name="_CountryContainer" for="@Model" />
+<form asp-controller="Country" asp-action="Save" asp-route-id="@ViewData["id"]" method="post" id="Add">
+    <input name="url" type="hidden" value="@Url.Action("Index", "People")" />
+    <label asp-for="@Model.CreateCountryViewModel.Name">Name</label>
+    <input asp-for="@Model.CreateCountryViewModel.Name" value="@Model.CreateCountryViewModel.Name" />
+    <input type="submit" value="Save" />
+</form>

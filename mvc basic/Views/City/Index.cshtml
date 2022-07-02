@@ -1,2 +1,14 @@
 ﻿@model mvc_basic.Models.Cities.CitiesViewModel
 <partial name="_CityContainer" for="@Model" />
+<form asp-controller="City" asp-action="Index" asp-route-id="" method="post" id="Add">
+    <input name="url" type="hidden" value="@Url.Action("Index", "People")" />
+    <label asp-for="@Model.CreateCityViewModel.Name">Name</label>
+    <input asp-for="@Model.CreateCityViewModel.Name" />
+    <select asp-for="@Model.CreateCityViewModel.Country">
+        @foreach (var country in Model.Countrys)
+        {
+            <option value="@country.CountryId">@country.Name</option>
+        }
+    </select>
+    <input type="submit" value="Save" />
+</form>

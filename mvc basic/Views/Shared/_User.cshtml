@@ -1,0 +1,7 @@
+﻿@model mvc_basic.Models.Identity.ApplicationUser
+<div>
+    <a>@Model.FirstName</a>
+    <a>@Model.LastName</a>
+    <a>@Model.Birth</a>
+    <a asp-controller="Admin" asp-action="Promot" asp-route-id="@Model.Id" >Promote to admin</a>
+</div>

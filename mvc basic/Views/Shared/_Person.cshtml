@@ -4,10 +4,14 @@
     <a>@Model.Number</a>
     <a>@Model.City.Name</a>
     <a>
-        @foreach (var lang in Model.LanguagePeople)
+        @if (Model.LanguagePeople != null)
         {
-        <span>|</span> @lang.Language.Name;
+            @foreach (var lang in Model.LanguagePeople)
+            {
+                <span>|</span> @lang.Language.Name;
+            }
         }
+        <p><a asp-controller="People" asp-action="Edit" asp-route-id="@Model.PeopleId">Edit</a></p>
     </a>
 </div>
     

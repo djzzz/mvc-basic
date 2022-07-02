@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mvc_basic.Data;
 using mvc_basic.Models.Languages;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace mvc_basic.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LanguageController : Controller
     {
         private readonly ApplicationDbContext Context;
